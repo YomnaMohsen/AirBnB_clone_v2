@@ -74,7 +74,7 @@ class HBNBCommand(cmd.Cmd):
                 pline = pline[2].strip()  # pline is now str
                 if pline:
                     # check for *args or **kwargs
-                    if pline[0] == '{' and pline[-1] =='}'\
+                    if pline[0] == '{' and pline[-1] == '}'\
                             and type(eval(pline)) is dict:
                         _args = pline
                     else:
@@ -116,35 +116,36 @@ class HBNBCommand(cmd.Cmd):
 
     def do_create(self, args):
         """ Create an object of any class"""
-        """create <Class name> <param 1> <param 2> <param 3>. param (key, value)"""
-        line = args.split() #modifications
+        """create <Class name> <param 1> <param 2> <param 3>.
+        param (key, value)"""
+        line = args.split()  # modifications
         if not args:
             print("** class name missing **")
             return
         elif line[0] not in HBNBCommand.classes:
             print("** class doesn't exist **")
             return
-        param_dict ={}
+        param_dict = {}
         for param in line[1:]:
             str_l = param.split("=")
             key = str_l[0]
             val = str_l[1]
             if val[0] == '"' and val[-1] == '"':
-               val = val.strip('"').replace('_', ' ')
-               val = val.replace('"', r'\"') 
-            # instead 2 cond. we can use eval(val) inside try   
+                val = val.strip('"').replace('_', ' ')
+                val = val.replace('"', r'\"')
+            # instead 2 cond. we can use eval(val) inside try
             elif val.isdigit():
-                val =int(val)
+                val = int(val)
             else:
                 try:
-                    val = float(val)       
+                    val = float(val)
                 except Exception:
                     continue
-            param_dict[key] = val 
+            param_dict[key] = val
         if param_dict == {}:
             new_instance = HBNBCommand.classes[line[0]]()
         else:
-            new_instance = HBNBCommand.classes[line[0]](**param_dict)        
+            new_instance = HBNBCommand.classes[line[0]](**param_dict) 
         new_instance.save()
         print(new_instance.id)
 
@@ -209,7 +210,7 @@ class HBNBCommand(cmd.Cmd):
         key = c_name + "." + c_id
 
         try:
-            del(storage.all()[key])
+            del (storage.all()[key])
             storage.save()
         except KeyError:
             print("** no instance found **")
@@ -341,6 +342,7 @@ class HBNBCommand(cmd.Cmd):
         """ Help information for the update class """
         print("Updates an object with new information")
         print("Usage: update <className> <id> <attName> <attVal>\n")
+
 
 if __name__ == "__main__":
     HBNBCommand().cmdloop()
