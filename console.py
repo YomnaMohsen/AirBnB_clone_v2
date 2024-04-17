@@ -126,21 +126,22 @@ class HBNBCommand(cmd.Cmd):
             return
         param_dict = {}
         for param in line[1:]:
-            str_l = param.split("=")
-            key = str_l[0]
-            val = str_l[1]
-            if val[0] == '"' and val[-1] == '"':
-                val = val.strip('"').replace('_', ' ')
-                val = val.replace('"', r'\"')
+            if '=' in param:
+                str_l = param.split("=")
+                key = str_l[0]
+                val = str_l[1]
+                if val[0] == '"' and val[-1] == '"':
+                    val = val.strip('"').replace('_', ' ')
+                    val = val.replace('"', r'\"')
             # instead 2 cond. we can use eval(val) inside try
-            elif val.isdigit():
-                val = int(val)
-            else:
-                try:
-                    val = float(val)
-                except Exception:
-                    continue
-            param_dict[key] = val
+                elif val.isdigit():
+                    val = int(val)
+                else:
+                    try:
+                        val = float(val)
+                    except Exception:
+                        continue
+                param_dict[key] = val
         if param_dict == {}:
             new_instance = eval(line[0])()
         else:
