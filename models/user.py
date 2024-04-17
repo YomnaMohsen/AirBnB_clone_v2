@@ -3,6 +3,9 @@
 from models.base_model import BaseModel, Base
 from sqlalchemy import Column, String, DateTime, ForeignKey
 from sqlalchemy.orm import relationship
+from models.user import User
+
+places = relationship('User', backref='user', cascade='delete')
 
 
 class User(BaseModel, Base):

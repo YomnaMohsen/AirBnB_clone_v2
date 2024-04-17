@@ -3,6 +3,9 @@
 from models.base_model import BaseModel, Base
 from sqlalchemy import Column, String, DateTime, ForeignKey
 from sqlalchemy.orm import relationship
+from models.city import City
+
+places = relationship('City', backref='cities', cascade='delete')
 
 
 class City(BaseModel, Base):
