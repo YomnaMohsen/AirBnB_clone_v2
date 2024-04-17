@@ -1,16 +1,13 @@
 #!/usr/bin/python3
-"""Defines City class module """
+""" City Module for HBNB project """
+from models.base_model import BaseModel, Base
+from sqlalchemy import Column, String, DateTime, ForeignKey
+from sqlalchemy.orm import relationship
 
-from models.base_model import BaseModel
 
-
-class City(BaseModel):
-    """class City that inherits from BaseModel
-        Args:
-
-        state_id: string - empty string: it will be the State.id
-        name: string - empty string
-    """
-
-    state_id = ""
-    name = ""
+class City(BaseModel, Base):
+    """ Rep. a city table im mysql db and inherits from SQLAlchemy
+    Base class"""
+    __tablename__ = 'cities'
+    name = Column(String(128), nullable=False)
+    state_id = Column(String(60), ForeignKey('states.id'), nullable=False)
