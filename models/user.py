@@ -6,7 +6,7 @@ from sqlalchemy.orm import relationship
 
 
 class User(BaseModel, Base):
-    """ Rep. a state table in mysql db and inherits from SQLAlchemy
+    """ Rep. a user table in mysql db and inherits from SQLAlchemy
     Base class"""
     __tablename__ = 'users'
     email = Column(String(128), nullable=False)
