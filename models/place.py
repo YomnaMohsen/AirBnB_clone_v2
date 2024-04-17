@@ -9,7 +9,7 @@ from models.review import Review
 
 
 class Place(BaseModel, Base):
-    """ Rep. a palce table in mysql db and inherits from SQLAlchemy
+    """ Rep. a place table in mysql db and inherits from SQLAlchemy
     Base class"""
     __tablename__ = 'places'
     city_id = Column(String(60), ForeignKey('cities.id'), nullable=False)
