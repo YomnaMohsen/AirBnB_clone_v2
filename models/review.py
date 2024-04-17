@@ -6,3 +6,5 @@ from models.base_model import BaseModel, Base
 class Review(BaseModel, Base):
     """ Rep. a review table in mysql db and inherits from SQLAlchemy
     Base class"""
+    __tablename__ = 'reviews'
+    

@@ -5,8 +5,6 @@ from sqlalchemy import Column, String, DateTime, ForeignKey
 from sqlalchemy.orm import relationship
 from models.city import City
 
-places = relationship('City', backref='cities', cascade='delete')
-
 
 class City(BaseModel, Base):
     """ Rep. a city table im mysql db and inherits from SQLAlchemy
@@ -14,3 +12,4 @@ class City(BaseModel, Base):
     __tablename__ = 'cities'
     name = Column(String(128), nullable=False)
     state_id = Column(String(60), ForeignKey('states.id'), nullable=False)
+    places = relationship('City', backref='cities', cascade='delete')
