@@ -19,11 +19,10 @@ class HBNBCommand(cmd.Cmd):
     # determines prompt for interactive/non-interactive modes
     prompt = '(hbnb) ' if sys.__stdin__.isatty() else ''
 
-    classes = {
-               'BaseModel': BaseModel, 'User': User, 'Place': Place,
-               'State': State, 'City': City, 'Amenity': Amenity,
-               'Review': Review
-              }
+    __classes = {
+               'BaseModel', 'User', 'Place',
+               'State', 'City', 'Amenity',
+               'Review'}
     dot_cmds = ['all', 'count', 'show', 'destroy', 'update']
     types = {
              'number_rooms': int, 'number_bathrooms': int,
@@ -122,7 +121,7 @@ class HBNBCommand(cmd.Cmd):
         if not args:
             print("** class name missing **")
             return
-        elif line[0] not in HBNBCommand.classes:
+        elif line[0] not in HBNBCommand.__classes:
             print("** class doesn't exist **")
             return
         param_dict = {}
@@ -143,11 +142,11 @@ class HBNBCommand(cmd.Cmd):
                     continue
             param_dict[key] = val
         if param_dict == {}:
-            new_instance = HBNBCommand.classes[line[0]]()
+            new_instance = eval(line[0])()
         else:
-            new_instance = HBNBCommand.classes[line[0]](**param_dict) 
-        new_instance.save()
+            new_instance = eval(line[0])(**param_dict)
         print(new_instance.id)
+        new_instance.save()
 
     def help_create(self):
         """ Help information for the create method """
@@ -226,7 +225,7 @@ class HBNBCommand(cmd.Cmd):
 
         if args:
             args = args.split(' ')[0]  # remove possible trailing args
-            if args not in HBNBCommand.classes:
+            if args not in HBNBCommand.__classes:
                 print("** class doesn't exist **")
                 return
             for k, v in storage._FileStorage__objects.items():

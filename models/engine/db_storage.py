@@ -1,7 +1,7 @@
 #!/usr/bin/python3
 """new DBstorage engine module"""
 from os import getenv
-from sqlalchemy import create_engine, Session
+from sqlalchemy import create_engine
 from models.base_model import Base, BaseModel
 from models.user import User
 from models.amenity import Amenity
