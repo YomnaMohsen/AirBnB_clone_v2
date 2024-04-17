@@ -3,6 +3,9 @@
 from models.base_model import BaseModel, Base
 from sqlalchemy import Column, String, DateTime, ForeignKey, Integer, Float
 from sqlalchemy.orm import relationship
+from os import getenv
+import models
+from models.review import Review
 
 
 class Place(BaseModel, Base):
@@ -19,3 +22,17 @@ class Place(BaseModel, Base):
     price_by_night = Column(Integer, nullable=False, default=0)
     latitude = Column(Float, nullable=False)
     longitude = Column(Float, nullable=False)
+    
+    if (getenv('HBNB_TYPE_STORAGE') == 'db'):
+        reviews = relationship('Review', backref='place', cascade='delete')
+    else:
+        @property
+        def reviews(self):
+            """reviews getter in case file storage"""
+            review_list = []
+            for rev in (models.storage.all(Review).values):
+                if (self.id == rev.id):
+                    review_list.append(rev)
+            return review_list
+            
+        
