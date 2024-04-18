@@ -62,4 +62,4 @@ class BaseModel:
 
     def delete(self):
         """calling delete method"""
-        pass
+        models.storage.delete(self)
