@@ -133,7 +133,7 @@ class HBNBCommand(cmd.Cmd):
                 if val[0] == '"' and val[-1] == '"':
                     val = val.strip('"').replace('_', ' ')
                     val = val.replace('"', r'\"')
-            # instead 2 cond. we can use eval(val) inside try
+            # inst---ead 2 cond. we can use eval(val) inside try
                 elif val.isdigit():
                     val = int(val)
                 else:
