@@ -62,5 +62,6 @@ class FileStorage:
         try:
             key = obj.__class__.__name__ + '.' + obj.id
             del FileStorage.__objects[key]
+            self.save()
         except (KeyError, AttributeError):
             pass
