@@ -61,8 +61,5 @@ class FileStorage:
          if obj is None do nothing"""
 
         if obj is not None:
-            key1 = ' '
-            for key, val in FileStorage.__objects.items():
-                if obj == val:
-                    key1 = key
-            del FileStorage.__objects[key1]
+            str_key = "{}.{}".format(type(obj).__name__, obj.id)
+            del FileStorage.__objects[str_key]
