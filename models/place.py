@@ -10,12 +10,12 @@ from models.amenity import Amenity
 
 
 place_amenity = Table('place_amenity', Base.metadata,
-                          Column('place_id', String(60), 
-                                 ForeignKey('places.id'), 
-                                 primary_key=True, nullable = False),
-                          Column('amenity_id', String(60), 
-                                 ForeignKey('amenities.id'), 
-                                 primary_key=True, nullable = False))
+                      Column('place_id', String(60),
+                             ForeignKey('places.id'),
+                             primary_key=True, nullable=False),
+                      Column('amenity_id', String(60),
+                             ForeignKey('amenities.id'),
+                             primary_key=True, nullable=False))
 
 
 class Place(BaseModel, Base):
@@ -33,10 +33,11 @@ class Place(BaseModel, Base):
     latitude = Column(Float, nullable=True)
     longitude = Column(Float, nullable=True)
     reviews = relationship('Review', backref='place', cascade='delete')
-    amenities = relationship ('Amenity', secondary='place_amenity', viewonly= False, back_populates="place_amenities")
+    amenities = relationship('Amenity', secondary='place_amenity',
+                             viewonly=False, back_populates="place_amenities")
 
     if (getenv('HBNB_TYPE_STORAGE') != 'db'):
-        
+
         @property
         def reviews(self):
             """reviews getter in case file storage"""
@@ -45,7 +46,7 @@ class Place(BaseModel, Base):
                 if (self.id == rev.place_id):
                     review_list.append(rev)
             return review_list
-        
+
         @property
         def amenities(self):
             """amenities getter in case file storage"""
@@ -53,8 +54,8 @@ class Place(BaseModel, Base):
             for amen in (models.storage.all(Amenity).values):
                 if amen.id in self.amenity_ids:
                     ament_list.append(amen)
-                
-            return ament_list    
+
+            return ament_list
 
         @amenities.setter
         def amenities(self, amenity):
