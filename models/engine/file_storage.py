@@ -62,4 +62,6 @@ class FileStorage:
 
         if obj is not None:
             str_key = "{}.{}".format(type(obj).__name__, obj.id)
-            del FileStorage.__objects[str_key]
+            FileStorage.__objects.pop(str_key)
+        else:
+            return    
