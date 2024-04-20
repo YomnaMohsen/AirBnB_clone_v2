@@ -32,9 +32,10 @@ class Place(BaseModel, Base):
     price_by_night = Column(Integer, nullable=False, default=0)
     latitude = Column(Float, nullable=True)
     longitude = Column(Float, nullable=True)
+    amenity_ids = []
     reviews = relationship('Review', backref='place', cascade='delete')
     amenities = relationship('Amenity', secondary='place_amenity',
-                             viewonly=False, back_populates="place_amenities")
+                             viewonly=False)
 
     if (getenv('HBNB_TYPE_STORAGE') != 'db'):
 
@@ -50,16 +51,14 @@ class Place(BaseModel, Base):
         @property
         def amenities(self):
             """amenities getter in case file storage"""
-            ament_list = []
-            for amen in (models.storage.all(Amenity).values):
-                if amen.id in self.amenity_ids:
-                    ament_list.append(amen)
-
-            return ament_list
+            amenities_list = []
+            for amenity in (models.storage.all(Amenity).values):
+                if amenity.id in self.amenity_ids:
+                    amenities_list.append(amenity)
+            return amenities_list
 
         @amenities.setter
         def amenities(self, amenity):
             """Setter for linked aminities"""
-            self.amenity_ids = []
             if (isinstance(amenity, Amenity)):
                 self.amenity_ids.append(amenity.id)
