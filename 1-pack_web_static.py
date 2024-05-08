@@ -14,7 +14,7 @@ def do_pack():
         dt = datetime.utcnow()
         f_name = "web_static_{}{}{}{}{}{}.tgz".format(
             dt.year, dt.month, dt.day, dt.hour, dt.minute, dt.second)
-        local("tar cf versions/{} web_static".format(f_name))
+        local("tar cvzf versions/{} web_static".format(f_name))
         return "versions/"
     except Exception:
         return None
