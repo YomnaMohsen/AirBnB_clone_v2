@@ -3,10 +3,10 @@
     from the contents of the web_static folder"""
 
 
-from fabric.api import local
+from fabric.api import local, task
 from datetime import datetime
 
-
+@task
 def do_pack():
     """generates .tgz file"""
     try:

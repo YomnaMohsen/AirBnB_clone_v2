@@ -3,13 +3,13 @@
 distributes an archive to your web servers, using the function do_deploy"""
 
 
-from fabric.api import put, run, env
+from fabric.api import put, run, env, task
 import os.path
 
 
 env.hosts = ['100.25.145.224', '18.209.225.166']
 
-
+@task
 def do_deploy(archive_path):
     """deploy files on server"""
     if not os.path.isfile(archive_path):
