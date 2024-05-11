@@ -1,5 +1,5 @@
 #!/usr/bin/python3
-"""creates and distributes an archive to your web servers, 
+"""creates and distributes an archive to your web servers,
 using the function deploy based on do_deploy and do_pack"""
 
 
@@ -8,7 +8,6 @@ import os.path
 from datetime import datetime
 
 env.hosts = ['100.25.145.224', '18.209.225.166']
-env.user = ['ubuntu', 'ubuntu']
 
 
 def do_pack():
@@ -22,7 +21,8 @@ def do_pack():
         return "versions/f_name"
     except Exception:
         return None
-    
+
+
 def do_deploy(archive_path):
     """deploy files on server"""
     if not os.path.isfile(archive_path):
@@ -45,10 +45,12 @@ def do_deploy(archive_path):
         return True
     except Exception as e:
         return False
-    
+
+
 def deploy():
     """dist archives to web servers"""
-    if (do_pack() is not None):
-        return (do_deploy(do_pack()))
+    arch_path = do_pack()
+    if (arch_path is None):
+        return False
     else:
-        return False    
+        return do_deploy(arch_path)
