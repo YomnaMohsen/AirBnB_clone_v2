@@ -44,10 +44,8 @@ def do_deploy(archive_path):
             run('rm -rf /data/web_static/current')
             run('ln -s /data/web_static/releases/{}/ /data/web_static/current'
                 .format(file_name))
-            print("deploy done")
-            return True
+        return True
     except Exception:
-        print("exception")
         return False
 
 
