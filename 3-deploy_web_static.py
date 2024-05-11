@@ -8,7 +8,6 @@ import os.path
 from datetime import datetime
 
 
-
 def do_pack():
     """generates .tgz file"""
     try:
