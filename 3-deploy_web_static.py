@@ -18,7 +18,7 @@ def do_pack():
         f_name = "web_static_{}{}{}{}{}{}.tgz".format(
             dt.year, dt.month, dt.day, dt.hour, dt.minute, dt.second)
         local("tar cvzf versions/{} web_static".format(f_name))
-        return "versions/{f_name}"
+        return f"versions/{f_name}"
     except Exception:
         return None
 
@@ -26,6 +26,7 @@ def do_pack():
 def do_deploy(archive_path):
     """deploy files on server"""
     if not os.path.isfile(archive_path):
+        print("deploy file false")
         return False
     file_ext = archive_path.split('/')[-1]
     file_name = file_ext.split('.')[0]
@@ -42,8 +43,10 @@ def do_deploy(archive_path):
         run('rm -rf /data/web_static/current')
         run('ln -s /data/web_static/releases/{}/ /data/web_static/current'
             .format(file_name))
+        print("deploy done")
         return True
     except Exception as e:
+        print("exception")
         return False
 
 
