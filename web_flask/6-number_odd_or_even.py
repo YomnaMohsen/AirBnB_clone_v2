@@ -42,7 +42,7 @@ def display_number_temp(n):
     return render_template('5-number.html', n=n)
 
 
-@app.route("/number_odd_even/<int:n>", strict_slashes=False)
+@app.route("/number_odd_or_even/<int:n>", strict_slashes=False)
 def display_number_o_e(n):
     """view fn to display if number is odd or even in an HTML page"""
     return render_template('6-number_odd_or_even.html', n=n)
