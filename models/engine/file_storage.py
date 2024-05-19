@@ -65,6 +65,7 @@ class FileStorage:
             FileStorage.__objects.pop(str_key)
         else:
             return
+
     def close(self):
         """calls reload function"""
-        self.reload()        
+        self.reload()
