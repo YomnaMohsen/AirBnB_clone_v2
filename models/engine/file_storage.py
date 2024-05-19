@@ -9,8 +9,7 @@ class FileStorage:
     __objects = {}
 
     def all(self, cls=None):
-        """Returns a dictionary of models currently in storage
-         after enhance in v2 return list too"""
+        """Returns a dictionary of models currently in storage"""
         if cls:
             filt_obj = {}
             for key, val in FileStorage.__objects.items():
