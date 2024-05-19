@@ -64,4 +64,7 @@ class FileStorage:
             str_key = "{}.{}".format(type(obj).__name__, obj.id)
             FileStorage.__objects.pop(str_key)
         else:
-            return    
+            return
+    def close(self):
+        """calls reload function"""
+        self.reload()        
