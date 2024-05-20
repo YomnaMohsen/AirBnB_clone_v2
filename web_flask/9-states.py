@@ -14,7 +14,7 @@ def display_states_id(id=None):
     all_states = storage.all(State).values()
     state_list = sorted(all_states, key=lambda x: x.name)
     if id is None:
-        return render_template('9-states.html', sr_list=state_list, n_id=True)
+        return render_template('9-states.html', sr_list=state_list)
     else:
         for st in state_list:
             if (st.id == id):
