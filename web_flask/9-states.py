@@ -7,14 +7,20 @@ from models.state import State
 app = Flask(__name__)
 
 
-@app.route("/cities_by_states", strict_slashes=False)
-def display_cities_states():
+@app.route("/states", strict_slashes=False)
+@app.route("/states/<id>", strict_slashes=False)
+def display_states_id(id=None):
     """view fn to list cities by States in an HTML page"""
     all_states = storage.all(State).values()
     state_list = sorted(all_states, key=lambda x: x.name)
-    for s in state_list:
-        s.cities.sort(key=lambda x: x.name)
-    return render_template('8-cities_by_states.html', sort_list=state_list)
+    if id is None:
+        return render_template('9-states.html', sort_list=state_list, n_id=True)
+    else:
+        for st in state_list:
+            if (st.id == id):
+                st.cities.sort(key=lambda x: x.name)
+                return render_template('9-states.html', st_city=st, id=True)
+            return render_template('9-states.html')    
 
 
 @app.teardown_appcontext
