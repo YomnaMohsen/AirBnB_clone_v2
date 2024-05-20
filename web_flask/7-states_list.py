@@ -8,7 +8,7 @@ from models.state import State
 app = Flask(__name__)
 
 
-@app.route("/cities_by_states", strict_slashes=False)
+@app.route("/states_list", strict_slashes=False)
 def display_states():
     """view fn to States in an HTML page"""
     all_states = storage.all(State).values()

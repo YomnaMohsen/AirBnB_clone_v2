@@ -9,7 +9,7 @@ app = Flask(__name__)
 
 
 @app.route("/cities_by_states", strict_slashes=False)
-def display_states():
+def display_cities_states():
     """view fn to States in an HTML page"""
     all_states = storage.all(State).values()
     state_list = sorted(all_states, key=lambda x: x.name)
