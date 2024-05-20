@@ -11,7 +11,7 @@
                     <LI>{{s.id }}: <B>{{ s.name }}</B></LI>                           
                 {% endfor%}    
             </UL>
-        {% elif id %}
+        {% elif st_city %}
             <H1>State: {{ st_city.name }}</H1>
             <H3>Cities:</H3>
                     <UL>
@@ -21,6 +21,7 @@
                     </UL>
         {% else %}
             <H1>Not found!</H1>
-        {% endif %}                        
+        {% endif %} 
+
     </BODY>
 </HTML>
