@@ -12,20 +12,12 @@ import models
 class State(BaseModel, Base):
     """ Rep. a state table in mysql db and inherits from SQLAlchemy
     Base class"""
-    # for task 8 checker
-    # id = Column(String(60), primary_key=True, nullable=False)
-    # created_at = Column(DateTime, nullable=False, default=datetime.utcnow())
-    # updated_at = Column(DateTime, nullable=False, default=datetime.utcnow())
     if (getenv('HBNB_TYPE_STORAGE') == 'db'):
         __tablename__ = 'states'
         name = Column(String(128), nullable=False)
         cities = relationship('City', backref='state', cascade='delete')
     else:
         name = ""
-
-    def __init__(self, *args, **kwargs):
-        """initializes state"""
-        super().__init__(*args, **kwargs)
 
     if (getenv('HBNB_TYPE_STORAGE') != 'db'):
         @property
