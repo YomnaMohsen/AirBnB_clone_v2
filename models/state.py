@@ -10,8 +10,9 @@ import models
 
 
 class State(BaseModel, Base):
-    """ Rep. a state table in mysql db and inherits from SQLAlchemy
+    """Rep. a state table in mysql db and inherits from SQLAlchemy
     Base class"""
+    
     if (getenv('HBNB_TYPE_STORAGE') == 'db'):
         __tablename__ = 'states'
         name = Column(String(128), nullable=False)
